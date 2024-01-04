@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class FurnitureAuthService {
   final _firebaseAuth = FirebaseAuth.instance;
-  final _firebaseFire = FirebaseFirestore.instance;
+  final _firebaseStorage = FirebaseFirestore.instance;
 
   Stream<void> authStateChanges() {
     return _firebaseAuth.authStateChanges();
@@ -17,8 +17,8 @@ class FurnitureAuthService {
         password: password,
       );
       return userCredential;
-    } on FirebaseAuthException {
-      throw Exception("Error firebase sign in error 😟");
+    } on FirebaseAuthException catch (e) {
+      throw Exception("Error firebase sign in error $e😟");
     }
   }
 
@@ -29,11 +29,14 @@ class FurnitureAuthService {
         email: email,
         password: password,
       );
-      await _firebaseFire.collection("users").doc().set({
-        "name": name,
-        "email": email,
-        "password": password,
-      });
+      await _firebaseStorage.collection("users").doc().set(
+        {
+          "name": name,
+          "email": email,
+          "uid": _firebaseAuth.currentUser!.uid,
+          "createTime": Timestamp.now(),
+        },
+      );
       return userCredential;
     } on FirebaseAuthException {
       throw Exception("Firebase sign up exception 😟");
@@ -41,6 +44,6 @@ class FurnitureAuthService {
   }
 
   Future<void> logOutButton() async {
-    return _firebaseAuth.signOut();
+    return await _firebaseAuth.signOut();
   }
 }

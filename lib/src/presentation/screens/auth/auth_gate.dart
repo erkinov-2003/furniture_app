@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_app/src/presentation/screens/page_builder/page_builder.dart';
 import 'package:furniture_app/src/service/auth_service.dart';
 
-import '../home/home_screen.dart';
 import 'switch_pages.dart';
 
 class AuthGate extends StatelessWidget {
@@ -14,7 +14,7 @@ class AuthGate extends StatelessWidget {
       stream: authService.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return const HomeScreen();
+          return const PageBuilder();
         } else {
           return const SwitchPages();
         }
