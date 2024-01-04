@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "350917919825",
+    "firebase_url": "https://furnitureapp-68e31-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "furnitureapp-68e31",
+    "storage_bucket": "furnitureapp-68e31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:350917919825:android:19479be9aa52f6b9302470",
+        "android_client_info": {
+          "package_name": "dev.erkinov.furniture_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACkEfQe1Lp87lBuEW335z7kZVe3GO_aJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
