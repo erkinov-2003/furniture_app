@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_app/src/controller/main_controller.dart';
-import 'package:furniture_app/src/presentation/screens/auth/switch_pages.dart';
+import 'package:furniture_app/src/presentation/screens/home/intro_screen.dart';
 import 'package:provider/provider.dart';
 
 class MyApplication extends StatelessWidget {
@@ -14,7 +14,7 @@ class MyApplication extends StatelessWidget {
         theme: ThemeData(useMaterial3: false),
         title: "Furniture app",
         debugShowCheckedModeBanner: false,
-        home:  const SwitchPages()
+        home: const IntroScreen(),
       )
     );
   }

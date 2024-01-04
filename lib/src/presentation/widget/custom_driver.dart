@@ -7,7 +7,7 @@ class CustomDriver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context);
+    final size = MediaQuery.of(context).size;
     return  Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -23,8 +23,8 @@ class CustomDriver extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 70,
-          width: 70,
+          height: size.height * 0.083,
+          width: size.width * 0.178,
           child: DecoratedBox(
             decoration: BoxDecoration(
               border: Border.all(color: AppColors.grey, width: 0.4),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:furniture_app/src/controller/main_controller.dart';
 import 'package:furniture_app/src/core/constants/app_colors.dart';
 import 'package:furniture_app/src/core/constants/app_images.dart';
-import 'package:furniture_app/src/presentation/screens/auth/sing_in_screen.dart';
+import 'package:furniture_app/src/presentation/screens/auth/auth_gate.dart';
 import 'package:furniture_app/src/presentation/widget/custom_button.dart';
 import 'package:provider/provider.dart';
 
@@ -62,7 +62,7 @@ class IntroScreen extends StatelessWidget {
                   child: CustomScreenBottom(
                     onPressed: () => mainController.navigatorPage(
                       context,
-                      SignInScreen(onPressed: () {}),
+                      const AuthGate(),
                     ),
                     buttonText: "Get Started",
                     size: Size(size.width * 0.392, size.height * 0.059),
