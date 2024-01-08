@@ -5,16 +5,10 @@ import 'package:furniture_app/src/presentation/widget/cartscreen_cart.dart';
 import 'package:furniture_app/src/presentation/widget/custom_button.dart';
 import 'package:provider/provider.dart';
 
-
 class CardScreen extends StatelessWidget {
   const CardScreen({
     super.key,
-    required this.title,
-    required this.price,
-    required this.image,
   });
-
-  final String title, price, image;
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +48,7 @@ class CardScreen extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
                   child: CustomCartScreen(
-                    title: mainController.getBasketList[index].title,
-                    image: mainController.getBasketList[index].image,
-                    price: mainController.getBasketList[index].price,
+                    index: index,
                   ),
                 );
               },
@@ -88,9 +80,34 @@ class CardScreen extends StatelessWidget {
           ),
           SizedBox(height: size.height * 0.041),
           CustomScreenBottom(
-            onPressed: () => {},
+            onPressed: () {
+              showModalBottomSheet(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(25),
+                    topLeft: Radius.circular(25),
+                  ),
+                ),
+                context: context,
+                builder: (context) {
+                  return SizedBox(
+                    height: 150,
+                    child: Center(
+                      child: Text(
+                        "Texnik ishlar olib borilmoqda!",
+                        style:
+                            Theme.of(context).textTheme.titleLarge!.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
             buttonText: "Check out",
-            size: const Size(360, 60),
+            size: Size(size.width * 0.918, size.height * 0.071),
           ),
         ],
       ),

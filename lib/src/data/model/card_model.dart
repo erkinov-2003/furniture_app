@@ -17,22 +17,22 @@ class CardModel {
     CardModel(
       title: "Black Simple Lamp",
       image: AppImages.mebel4,
-      price: "\$ 12.00",
+      price: "12.00",
     ),
     CardModel(
       title: "Minimal Stand",
       image: AppImages.mebel1,
-      price: "\$ 25.00",
+      price: "25.00",
     ),
     CardModel(
       title: "Coffee Chair",
       image: AppImages.mebel3,
-      price: "\$ 20.00",
+      price: "20.00",
     ),
     CardModel(
       title: "Simple Desk",
       image: AppImages.mebel2,
-      price: "\$ 50.00",
+      price: "50.00",
     ),
   ];
 

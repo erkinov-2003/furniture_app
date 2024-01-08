@@ -3,7 +3,7 @@ import 'package:furniture_app/src/controller/main_controller.dart';
 import 'package:provider/provider.dart';
 
 Future favoriteDeleteDialog(BuildContext context, int index) {
-  final mainController = Provider.of<MainController>(context);
+  final mainController = Provider.of<MainController>(context, listen: false);
   return showDialog(
     context: context,
     builder: (context) => AlertDialog(
@@ -23,7 +23,7 @@ Future favoriteDeleteDialog(BuildContext context, int index) {
       actions: [
         TextButton(
           onPressed: () {
-            mainController.favoriteList.removeAt(index);
+            mainController.getCartList.removeAt(index);
             Navigator.pop(context);
           },
           child: Text(

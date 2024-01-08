@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_app/src/controller/main_controller.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_icons.dart';
@@ -7,14 +9,13 @@ import 'custom_counter.dart';
 class CustomCartScreen extends StatelessWidget {
   const CustomCartScreen({
     super.key,
-    required this.title,
-    required this.price,
-    required this.image,
+    required this.index,
   });
-  final String title, price, image;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
+    final mainController = Provider.of<MainController>(context);
     final size = MediaQuery.of(context).size;
     return Column(
       children: [
@@ -27,7 +28,8 @@ class CustomCartScreen extends StatelessWidget {
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(image,
+                    image: AssetImage(
+                      mainController.getBasketList[index].image,
                     ),
                     fit: BoxFit.cover,
                   ),
@@ -44,8 +46,8 @@ class CustomCartScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
-                    style: Theme.of(context).textTheme!.titleMedium!.copyWith(
+                    mainController.getBasketList[index].title,
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: Colors.black,
                           fontFamily: "MerriWeather",
                           fontWeight: FontWeight.w500,
@@ -53,27 +55,33 @@ class CustomCartScreen extends StatelessWidget {
                   ),
                   SizedBox(height: size.height * 0.010),
                   Text(
-                   price,
-                    style: Theme.of(context).textTheme!.titleMedium!.copyWith(
+                    mainController.getBasketList[index].price,
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: Colors.black,
                           fontFamily: "MerriWeather",
                           fontWeight: FontWeight.w500,
                         ),
                   ),
                   const SizedBox(height: 20),
-                  const CustomCounter(),
+                  CustomCounter(
+                    value: 0,
+                    incrementFunction: () {},
+                    decrementFunction: () {},
+                  ),
                 ],
               ),
             ),
-            const Spacer(flex: 5),
+            const Spacer(flex: 4),
             GestureDetector(
               onTap: () {
-
+                mainController.deleteBasketList(
+                  mainController.getBasketList[index],
+                );
               },
-              child: SizedBox(
-                height: size.height * size.height * 0.032,
-                width: size.width * 0.060,
-                child: const DecoratedBox(
+              child: const SizedBox(
+                height: 24,
+                width: 24,
+                child: DecoratedBox(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: AppColors.white,

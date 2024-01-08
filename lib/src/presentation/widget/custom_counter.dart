@@ -3,14 +3,22 @@ import 'package:furniture_app/src/core/constants/app_colors.dart';
 import 'package:furniture_app/src/core/constants/app_icons.dart';
 
 class CustomCounter extends StatelessWidget {
-  const CustomCounter({super.key});
+  const CustomCounter({
+    super.key,
+    this.decrementFunction,
+    this.incrementFunction,
+    required this.value,
+  });
+  final void Function()? decrementFunction;
+  final void Function()? incrementFunction;
+  final int value;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         GestureDetector(
-          onTap: () => {},
+          onTap: incrementFunction,
           child: const SizedBox(
             height: 28,
             width: 28,
@@ -33,7 +41,7 @@ class CustomCounter extends StatelessWidget {
         ),
         const SizedBox(width: 5),
         Text(
-          "01",
+          value.toString(),
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 color: AppColors.black,
                 fontFamily: "Gelios",
@@ -42,7 +50,7 @@ class CustomCounter extends StatelessWidget {
         ),
         const SizedBox(width: 5),
         GestureDetector(
-          onTap: () => {},
+          onTap: decrementFunction,
           child: const SizedBox(
             height: 28,
             width: 28,

@@ -16,12 +16,21 @@ class CustomHomeAppBar extends StatelessWidget {
       preferredSize: const Size(double.infinity, 100),
       child: AppBar(
         elevation: 0,
-        leading: IconButton(
-          onPressed: () => {},
-          icon: const Icon(
-            Icons.search,
-            size: 30,
-            color: Colors.black,
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            height: 30,
+            width: 30,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.black, width: 0.4),
+                image: const DecorationImage(
+                  image: AssetImage(AppIcons.logoIcon),
+                  fit: BoxFit.cover,
+                )
+              ),
+            ),
           ),
         ),
         backgroundColor: AppColors.white,
@@ -53,7 +62,7 @@ class CustomHomeAppBar extends StatelessWidget {
             child: GestureDetector(
               onTap: () => mainController.navigatorPage(
                 context,
-                const CardScreen(image: "", title: "", price: ""),
+                const CardScreen(),
               ),
               child: mainController.getBasketList.isEmpty
                   ? const Image(
@@ -62,7 +71,7 @@ class CustomHomeAppBar extends StatelessWidget {
                       ),
                     )
                   : Badge(
-                      label: Text("${mainController.basketList.length}"),
+                      label: Text("${mainController.getBasketList.length}"),
                       child: const Image(
                         image: AssetImage(AppIcons.shopIcon),
                         height: 20,

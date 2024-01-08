@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:furniture_app/src/core/constants/app_colors.dart';
 import 'package:furniture_app/src/core/constants/app_icons.dart';
 import 'package:furniture_app/src/presentation/screens/dialog/profile_help_center.dart';
+import 'package:furniture_app/src/presentation/screens/dialog/profile_info.dart';
 import 'package:furniture_app/src/presentation/screens/dialog/profile_log_out.dart';
 import 'package:furniture_app/src/service/auth_service.dart';
 
@@ -86,6 +87,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               CustomProfileCart(
                 title: "Info",
                 images: AppIcons.infoIcon,
+                onPressed: () => profileInfoDialog(context),
               ),
               SizedBox(height: size.height * 0.035),
               CustomProfileCart(

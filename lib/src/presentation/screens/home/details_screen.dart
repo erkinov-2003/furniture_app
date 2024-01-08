@@ -4,11 +4,12 @@ import 'package:furniture_app/src/core/constants/app_colors.dart';
 import 'package:furniture_app/src/core/constants/app_icons.dart';
 import 'package:furniture_app/src/data/model/card_model.dart';
 import 'package:furniture_app/src/presentation/screens/dialog/favorite_dialog.dart';
+import 'package:furniture_app/src/presentation/screens/dialog/home_cart_dialog.dart';
 import 'package:furniture_app/src/presentation/widget/custom_button.dart';
 import 'package:furniture_app/src/presentation/widget/custom_counter.dart';
 import 'package:provider/provider.dart';
 
-class DetailsScreen extends StatelessWidget {
+class DetailsScreen extends StatefulWidget {
   const DetailsScreen({
     super.key,
     required this.title,
@@ -17,6 +18,11 @@ class DetailsScreen extends StatelessWidget {
   });
   final String title, price, image;
 
+  @override
+  State<DetailsScreen> createState() => _DetailsScreenState();
+}
+
+class _DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -37,7 +43,7 @@ class DetailsScreen extends StatelessWidget {
                       bottomLeft: Radius.circular(45),
                     ),
                     image: DecorationImage(
-                      image: AssetImage(image),
+                      image: AssetImage(widget.image),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -112,7 +118,7 @@ class DetailsScreen extends StatelessWidget {
             Align(
               alignment: const Alignment(-0.8, 0.2),
               child: Text(
-                title,
+                widget.title,
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: AppColors.black,
                       fontWeight: FontWeight.w500,
@@ -128,14 +134,18 @@ class DetailsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      price,
+                      "\$${widget.price}",
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
                             color: AppColors.black,
                             fontWeight: FontWeight.w500,
                             fontFamily: "Gelasio",
                           ),
                     ),
-                    const CustomCounter(),
+                    CustomCounter(
+                      value: mainController.counterPrice,
+                      decrementFunction: () => mainController.decrementCounter(),
+                      incrementFunction: () => mainController.incrementCounter(),
+                    ),
                   ],
                 ),
               ),
@@ -162,18 +172,17 @@ class DetailsScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: () => favoriteAlertDialog(context, () {
                       final cardModel = CardModel(
-                        title: title,
-                        image: image,
-                        price: price,
+                        title: widget.title,
+                        image: widget.image,
+                        price: widget.price,
                       );
                       mainController.favoriteSaveData(cardModel);
-                      mainController.saveFavoriteDb();
                       Navigator.pop(context);
                     }),
-                    child: const SizedBox(
-                      height: 60,
-                      width: 60,
-                      child: DecoratedBox(
+                    child: SizedBox(
+                      height: size.height * 0.071,
+                      width: size.width * 0.153,
+                      child: const DecoratedBox(
                         decoration: BoxDecoration(
                           color: Colors.white,
                           boxShadow: [
@@ -197,9 +206,20 @@ class DetailsScreen extends StatelessWidget {
                     ),
                   ),
                   CustomScreenBottom(
-                    onPressed: () {},
+                    onPressed: () => homeCartDialog(context, () {
+                      final model = CardModel(
+                        title: widget.title,
+                        image: widget.image,
+                        price: widget.price,
+                      );
+                      mainController.getAllSaveBasketList(
+                        model,
+                        mainController.counterPrice,
+                      );
+                      Navigator.pop(context);
+                    }),
                     buttonText: "Add to Cart",
-                    size: const Size(260, 60),
+                    size: Size(size.width * 0.663, size.height * 0.071),
                   ),
                 ],
               ),

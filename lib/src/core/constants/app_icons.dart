@@ -15,4 +15,5 @@ class AppIcons {
   static const telegramIcon = "assets/icons/telegram.png";
   static const instagramIcon = "assets/icons/instagram.png";
   static const phoneIcon = "assets/icons/telephone.png";
+  static const logoIcon = "assets/icons/Furniture.png";
 }

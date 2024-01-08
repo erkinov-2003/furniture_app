@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_app/src/controller/main_controller.dart';
 import 'package:furniture_app/src/core/constants/app_colors.dart';
-import 'package:furniture_app/src/presentation/widget/custom_button.dart';
 import 'package:furniture_app/src/presentation/widget/favorite_card.dart';
 import 'package:provider/provider.dart';
 
@@ -34,9 +33,9 @@ class FavoriteScreen extends StatelessWidget {
               child: Text(
                 "Favorite isEmty....",
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
-                ),
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
               ),
             )
           : SafeArea(
@@ -48,15 +47,11 @@ class FavoriteScreen extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       itemCount: mainController.getCartList.length,
                       itemBuilder: (context, index) {
-                        return CustomFavoriteCard(index: index);
+                        return CustomFavoriteCard(
+                          index: index,
+                        );
                       },
                     ),
-                  ),
-                  SizedBox(height: size.height * 0.029),
-                  CustomScreenBottom(
-                    size: Size(size.width * 0.918, size.height * 0.071),
-                    onPressed: () => {},
-                    buttonText: "Add all to my cart",
                   ),
                 ],
               ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_app/src/controller/main_controller.dart';
-import 'package:furniture_app/src/presentation/screens/dialog/favorite_delete.dart';
-import 'package:furniture_app/src/presentation/screens/dialog/home_cart_dialog.dart';
+
 import 'package:provider/provider.dart';
 
 import '../../core/constants/app_colors.dart';
@@ -56,7 +55,7 @@ class CustomFavoriteCard extends StatelessWidget {
                 ),
                 SizedBox(height: size.height * 0.012),
                 Text(
-                  mainController.getCartList[index].price,
+                  "\$${mainController.getCartList[index].price}",
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         color: AppColors.black,
                         fontWeight: FontWeight.w500,
@@ -71,7 +70,9 @@ class CustomFavoriteCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               GestureDetector(
-                onTap: () => favoriteDeleteDialog(context, index),
+                onTap: () => mainController.deleteFavoriteList(
+                  mainController.getCartList[index],
+                ),
                 child: const SizedBox(
                   height: 27,
                   width: 27,
@@ -89,35 +90,6 @@ class CustomFavoriteCard extends StatelessWidget {
                       child: Image(
                         image: AssetImage(AppIcons.clearIcon),
                         height: 20,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: size.height * 0.023),
-              GestureDetector(
-                onTap: () => homeCartDialog(
-                  context,
-                  () => favoriteDeleteDialog(context, index),
-                ),
-                child: const SizedBox(
-                  height: 27,
-                  width: 27,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black,
-                            blurRadius: 0.5,
-                          ),
-                        ]),
-                    child: Center(
-                      child: Image(
-                        image: AssetImage(AppIcons.shopIcon),
-                        height: 16,
                         color: Colors.black,
                       ),
                     ),
